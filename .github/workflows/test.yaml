@@ -1,22 +1,23 @@
+name: CI
 on: push
 
+permissions:
+  contents: write
+
 jobs:
-  test:
+  test-action:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: 读取仓库内容
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11.9'
-
-      - name: Install dependencies
+      - name: 安装依赖&项目打包
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pwd
+          ls
 
-      - name: Run tests
-        run: |
-          python test.py
+      # - name: 部署
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     branch: gh-pages
+      #     folder: build
